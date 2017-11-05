@@ -50,3 +50,8 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+*.bin
+
+zpc-cpm/cpm22.s
+zpc-fs/files/*

@@ -1,0 +1,22 @@
+SADR = $$(( $(EADR) - $(BADR) + 1 ))
+
+MAKE		= make -r
+AS			= z80-unknown-coff-as
+LD			= z80-unknown-coff-ld
+DD			= dd
+DEL			= rm
+
+default :
+	$(MAKE) $(TARGET).bin
+
+$(TARGET).bin : $(OBJS_TARGET) Makefile Makefile.in
+	$(LD) $(LFLAGS) -o $(TARGET).bim $(OBJS_TARGET)
+	$(DD) if=$(TARGET).bim bs=1 skip=$(BADR) count=$(SADR) of=$(TARGET).bin
+
+clean :
+	-$(DEL) *.o
+	-$(DEL) *.bin
+	-$(DEL) *.bim
+
+%.o : %.s Makefile
+	$(AS) $(AFLAGS) -o $*.o -c $*.s

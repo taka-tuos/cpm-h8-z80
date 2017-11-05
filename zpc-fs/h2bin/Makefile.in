@@ -1,0 +1,16 @@
+MAKE		= make -r
+CC			= gcc
+DEL			= rm
+
+default :
+	$(MAKE) $(TARGET)
+
+$(TARGET) : $(OBJS_TARGET) Makefile Makefile.in
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS_TARGET)
+
+clean :
+	-$(DEL) *.o
+	-$(DEL) $(TARGET)
+
+%.o : %.c Makefile
+	$(CC) $(CFLAGS) -o $*.o -c $*.c
